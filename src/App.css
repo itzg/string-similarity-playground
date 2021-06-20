@@ -12,8 +12,21 @@
 
 .Inputs {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .InputGroup {
+  margin-right: 10px;
+}
+
+.Tokens {
+  margin: 5px 0;
+}
+
+.Token {
+  display: inline-block;
+  padding: 4px;
   margin: 2px;
+  background-color: #ddfcff;
+  border-radius: 4px;
 }
