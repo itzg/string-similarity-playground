@@ -11,9 +11,14 @@ export function splitByWord(str) {
 }
 
 export function dice(leftTokens, rightTokens) {
-    const intersection = leftTokens.reduce((accumulator, current) => {
+    // will need to iterate over smaller set
+    const inputs = leftTokens.length < rightTokens.length ?
+        [leftTokens,rightTokens] :
+        [rightTokens,leftTokens];
+
+    const intersection = inputs[0].reduce((accumulator, current) => {
         console.log(accumulator)
-        return rightTokens.includes(current) ? accumulator.concat(current) : accumulator;
+        return inputs[1].includes(current) ? accumulator.concat(current) : accumulator;
     }, []);
 
     //         return 2d * intersection / (left.size() + right.size());
