@@ -20,12 +20,34 @@ function Tokens({tokens}) {
     ) : <></>;
 }
 
+function getParam(name, defaultValue) {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has(name)) {
+        return params.get(name);
+    } else {
+        return defaultValue;
+    }
+}
+
+function ResultsLink({left, right, shingleSize}) {
+    var url = new URL(window.location);
+    url.searchParams.set("left", left);
+    url.searchParams.set("right", right);
+    url.searchParams.set("shingleSize", shingleSize);
+
+    return (
+        <div className="ResultsLink">
+            <a href={url.toString()}>Link to these results</a>
+        </div>
+    )
+}
+
 function App() {
-    const [left, setLeft] = useState("apple");
+    const [left, setLeft] = useState(getParam("left", "apple"));
     const [leftTokens, setLeftTokens] = useState([]);
-    const [right, setRight] = useState("happen");
+    const [right, setRight] = useState(getParam("right", "happen"));
     const [rightTokens, setRightTokens] = useState([]);
-    const [shingleSize, setShingleSize] = useState(3);
+    const [shingleSize, setShingleSize] = useState(getParam("shingleSize", 3));
     const [result, setResult] = useState({});
 
     useEffect(() => {
@@ -76,6 +98,7 @@ function App() {
                     <div><h3>Score</h3>
                         {result.score}
                     </div>
+                    <ResultsLink left={left} right={right} shingleSize={shingleSize}/>
                 </div>
             </div>
         </div>
