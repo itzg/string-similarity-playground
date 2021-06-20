@@ -10,11 +10,15 @@ function Input({value, setValue}) {
     )
 }
 
-function Tokens({tokens}) {
+function Tokens({tokens, intersection}) {
+    function tokenClass(intersects) {
+        return intersects ? "Token Intersected" : "Token";
+    }
+
     return tokens ? (
         <div className="Tokens">
             {
-                tokens.map(token => <span className="Token">{token}</span>)
+                tokens.map(token => <span className={tokenClass(intersection && intersection.includes(token))}>{token}</span>)
             }
         </div>
     ) : <></>;
@@ -71,11 +75,11 @@ function App() {
                 <div className="Inputs">
                     <div className="InputGroup">
                         <Input value={left} setValue={setLeft}/>
-                        <Tokens tokens={leftTokens}/>
+                        <Tokens tokens={leftTokens} intersection={result.intersection}/>
                     </div>
                     <div className="InputGroup">
                         <Input value={right} setValue={setRight}/>
-                        <Tokens tokens={rightTokens}/>
+                        <Tokens tokens={rightTokens} intersection={result.intersection}/>
                     </div>
                 </div>
             </div>

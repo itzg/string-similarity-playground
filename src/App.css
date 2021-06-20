@@ -31,6 +31,10 @@
   border-radius: 4px;
 }
 
+.Token.Intersected {
+  background-color: #02f0f5;
+}
+
 .ResultsLink {
   margin-top: 1em;
 }
