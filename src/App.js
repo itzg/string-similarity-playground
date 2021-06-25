@@ -46,6 +46,11 @@ function ResultsLink({left, right, shingleSize}) {
     )
 }
 
+function ExternalLink({href,children}) {
+    return <a href={href} target="_blank" rel="noreferrer">{children}</a>
+
+}
+
 function App() {
     const [left, setLeft] = useState(getParam("left", "apple"));
     const [leftTokens, setLeftTokens] = useState([]);
@@ -68,43 +73,52 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Sørensen–Dice coefficient string similarity playground</h1>
-            <a href="https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient">More information about this algorithm</a>
-            <div>
-                <h2>Inputs</h2>
-                <div className="Inputs">
-                    <div className="InputGroup">
-                        <Input value={left} setValue={setLeft}/>
-                        <Tokens tokens={leftTokens} intersection={result.intersection}/>
-                    </div>
-                    <div className="InputGroup">
-                        <Input value={right} setValue={setRight}/>
-                        <Tokens tokens={rightTokens} intersection={result.intersection}/>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h2>Config</h2>
+            <header>
+                <h1>Sørensen–Dice coefficient string similarity playground</h1>
+                <ExternalLink href="https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient">More information about this algorithm</ExternalLink>
+            </header>
+            <main>
                 <div>
-                    <label htmlFor="shingle-size">Shingle Size:</label>
-                    <input id="shingle-size" type="range" min={0} max={10}
-                           value={shingleSize} onChange={event => setShingleSize(event.target.value)}/>
-                    {shingleSize > 0 ? shingleSize : "words"}
+                    <h2>Inputs</h2>
+                    <div className="Inputs">
+                        <div className="InputGroup">
+                            <Input value={left} setValue={setLeft}/>
+                            <Tokens tokens={leftTokens} intersection={result.intersection}/>
+                        </div>
+                        <div className="InputGroup">
+                            <Input value={right} setValue={setRight}/>
+                            <Tokens tokens={rightTokens} intersection={result.intersection}/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <h2>Output</h2>
-                <div className="Output">
+                <div>
+                    <h2>Config</h2>
                     <div>
-                        <h3>Intersection</h3>
-                        <Tokens tokens={result.intersection}/>
+                        <label htmlFor="shingle-size">Shingle Size:</label>
+                        <input id="shingle-size" type="range" min={0} max={10}
+                               value={shingleSize} onChange={event => setShingleSize(event.target.value)}/>
+                        {shingleSize > 0 ? shingleSize : "words"}
                     </div>
-                    <div><h3>Score</h3>
-                        {result.score}
-                    </div>
-                    <ResultsLink left={left} right={right} shingleSize={shingleSize}/>
                 </div>
-            </div>
+                <div>
+                    <h2>Output</h2>
+                    <div className="Output">
+                        <div>
+                            <h3>Intersection</h3>
+                            <Tokens tokens={result.intersection}/>
+                        </div>
+                        <div><h3>Score</h3>
+                            {result.score}
+                        </div>
+                        <ResultsLink left={left} right={right} shingleSize={shingleSize}/>
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <ExternalLink href="https://github.com/itzg/string-similarity-playground">
+                    <img src="https://img.shields.io/github/stars/itzg/string-similarity-playground?style=social" alt="Github Repo Stars"/>
+                </ExternalLink>
+            </footer>
         </div>
     );
 }
