@@ -74,7 +74,9 @@ function App() {
     return (
         <div className="App">
             <header>
-                <h1>Sørensen–Dice coefficient string similarity playground</h1>
+                <h1>
+                    String similarity playground <small className="block">using Sørensen–Dice coefficient</small>
+                </h1>
                 <ExternalLink href="https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient">More information about this algorithm</ExternalLink>
             </header>
             <main>
@@ -101,17 +103,11 @@ function App() {
                     </div>
                 </div>
                 <div>
-                    <h2>Output</h2>
+                    <h2>Similarity Score</h2>
                     <div className="Output">
-                        <div>
-                            <h3>Intersection</h3>
-                            <Tokens tokens={result.intersection}/>
-                        </div>
-                        <div><h3>Score</h3>
                             {result.score}
-                        </div>
-                        <ResultsLink left={left} right={right} shingleSize={shingleSize}/>
                     </div>
+                    <ResultsLink left={left} right={right} shingleSize={shingleSize}/>
                 </div>
             </main>
             <footer>
